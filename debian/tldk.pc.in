@@ -1,0 +1,10 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${prefix}/lib/@DEB_HOST_MULTIARCH@
+includedir=${prefix}/include
+
+Name: tldk
+Description: Transport Layer Development Kit library
+Version: @VERSION@
+Libs: -L${libdir} -ltle_dring -ltle_l4p -ltle_misc -ltle_timer
+Requires.private: libdpdk

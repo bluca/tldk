@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+#export DH_OPTIONS=-v
+
+# see EXAMPLES in dpkg-buildflags(1) and read /usr/share/dpkg/*
+DPKG_EXPORT_BUILDFLAGS=1
+include /usr/share/dpkg/default.mk
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+export EXTRA_CFLAGS+=-g
+export RTE_SDK=/usr/share/dpdk/
+export RTE_INCLUDE=/usr/include/dpdk
+
+# People rebuilding this package can overwrite RTE_TARGET via DEB_BUILD_OPTIONS
+ifneq (,$(filter rte_target=%,$(DEB_BUILD_OPTIONS)))
+RTE_TARGET ?= $(patsubst rte_target=%,%,$(filter rte_target=%,$(DEB_BUILD_OPTIONS)))
+endif
+
+ifneq (,$(filter $(DEB_HOST_ARCH), arm64))
+export RTE_TARGET ?= "arm64-armv8a-linuxapp-gcc"
+else
+ifneq (,$(filter $(DEB_HOST_ARCH), ppc64el))
+export RTE_TARGET ?= "ppc_64-power8-linuxapp-gcc"
+else
+export RTE_TARGET ?= "$(DEB_HOST_GNU_CPU)-default-linuxapp-gcc"
+endif
+endif
+
+%:
+	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf $(CURDIR)/debian/_build
+
+override_dh_auto_build:
+	dh_auto_build -- V=$(DH_VERBOSE) O=$(CURDIR)/debian/_build/
+	sed -e "s/@VERSION@/$(DEB_VERSION_UPSTREAM)/" \
+		-e "s|@DEB_HOST_MULTIARCH@|$(DEB_HOST_MULTIARCH)|g" \
+		debian/tldk.pc.in > debian/_build/tldk.pc
+
+override_dh_auto_test:
+	dh_auto_test -- V=$(DH_VERBOSE) O=$(CURDIR)/debian/_build/

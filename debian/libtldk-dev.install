@@ -1,0 +1,4 @@
+#! /usr/bin/dh-exec
+debian/_build/include/* /usr/include/
+debian/_build/lib/*.so /usr/lib/${DEB_HOST_MULTIARCH}/
+debian/_build/tldk.pc /usr/lib/${DEB_HOST_MULTIARCH}/pkgconfig/

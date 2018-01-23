@@ -1,0 +1,101 @@
+Source: tldk
+Priority: optional
+Maintainer: deb_dpdk Packagers <deb-dpdk@lists.fd.io>
+Uploaders: Luca Boccassi <bluca@debian.org>
+Build-Depends: debhelper (>= 9), dh-exec, dpdk-dev
+Standards-Version: 4.1.3
+Section: libs
+Homepage: https://wiki.fd.io/view/TLDK
+
+Package: tldk
+Section: admin
+Architecture: amd64 arm64 i386 ppc64el
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Transport Layer Development Kit (examples)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains an example application, l4fwd, and other documentation
+ and examples.
+
+Package: libtldk-dev
+Section: libdevel
+Architecture: amd64 arm64 i386 ppc64el
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: libdpdk-dev, ${misc:Depends}
+Description: Transport Layer Development Kit (basic development files)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains the basic headers and library files required to
+ build external applications which will also require at least SSE3 support
+ when running.
+
+Package: libtle-dring1
+Architecture: amd64 arm64 i386 ppc64el
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Transport Layer Development Kit (libtle-dring1 runtime library)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains the runtime libraries for libtle_dring.
+
+Package: libtle-l4p1
+Architecture: amd64 arm64 i386 ppc64el
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Transport Layer Development Kit (libethdev runtime library)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains the runtime libraries for libtle_l4p.
+
+Package: libtle-misc1
+Architecture: amd64 arm64 i386 ppc64el
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Transport Layer Development Kit (libethdev runtime library)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains the runtime libraries for libtle_misc.
+
+Package: libtle-timer1
+Architecture: amd64 arm64 i386 ppc64el
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Transport Layer Development Kit (libethdev runtime library)
+ TLDK implements a set of libraries for L4 protocol processing (UDP, TCP etc.)
+ for both IPv4 and IPv6.
+ The goal is to provide lightweight, high performance and highly adaptable
+ implementation for L4(UDP, TCP etc.) protocol processing. The provided API
+ are not planned to be compatible with BSD socket API. These libraries are
+ supposed to be built on top of DPDK.
+ .
+ This package contains the runtime libraries for libtle_timer.

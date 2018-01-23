@@ -1,0 +1,34 @@
+--- a/lib/libtle_l4p/Makefile
++++ b/lib/libtle_l4p/Makefile
+@@ -26,6 +26,9 @@ LIB = libtle_l4p.a
+ CFLAGS += -O3
+ CFLAGS += $(WERROR_FLAGS) -I$(SRCDIR)
+ 
++LDLIBS += -L$(RTE_OUTPUT)/lib
++LDLIBS += -lrte_eal -lrte_ring -lrte_mempool -lrte_hash -lrte_ip_frag -ltle_timer
++
+ EXPORT_MAP := tle_l4p_version.map
+ 
+ LIBABIVER := 1
+--- a/lib/libtle_timer/Makefile
++++ b/lib/libtle_timer/Makefile
+@@ -26,6 +26,8 @@ LIB = libtle_timer.a
+ CFLAGS += -O3
+ CFLAGS += $(WERROR_FLAGS) -I$(SRCDIR)
+ 
++LDLIBS += -lrte_eal
++
+ EXPORT_MAP := tle_timer_version.map
+ 
+ LIBABIVER := 1
+--- a/mk/tle.lib.mk
++++ b/mk/tle.lib.mk
+@@ -13,6 +13,8 @@
+ 
+ EXTLIB_BUILD := y
+ 
++export CONFIG_RTE_MAJOR_ABI=
++
+ # we must create the output dir first and recall the same Makefile
+ # from this directory
+ ifeq ($(NOT_FIRST_CALL),)
